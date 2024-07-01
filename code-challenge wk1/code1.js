@@ -18,3 +18,14 @@ else if (marks>=40){
 else {
         return 'E'
 }
+
+const computerMarks = parseFloat(prompt('Enter computer marks:'));
+const physicsMarks = parseFloat(prompt('Enter physics marks:'));
+const mathsMarks = parseFloat(prompt('Enter maths marks:'));
+
+const totalMarks = computerMarks + physicsMarksMarks + mathsMarks;
+const averageMarks = totalMarks / 3;
+const grade = calculateGrade(averageMarks);
+
+console.log(`Average marks: ${averageMarks.toFixed(2)}`);
+console.log(`Grade: ${grade}`);

@@ -44,3 +44,8 @@ function calculateNetSalary(basicSalary, benefits) {
     console.log(`NHIF Deduction: ${nhifDeduction.toFixed(2)}`);
     console.log(`NSSF Deduction: ${nssfDeduction.toFixed(2)}`);
     console.log(`Net Salary: ${netSalary.toFixed(2)}`);
+//---------------------------------------------------------------------//
+    const basicSalary = parseFloat(prompt("Enter basic salary (Ksh):"));
+const benefits = parseFloat(prompt("Enter additional benefits (Ksh):"));
+
+calculateNetSalary(basicSalary, benefits);

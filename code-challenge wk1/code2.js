@@ -16,5 +16,6 @@ if(demeritPoints>12){
 else{
     console.log("points: $(demeritPoints)");
 }
+//-------------------------------------------------------------------------------------------------------------//
 const carspeed = parseFloat(prompt("Enter the car speed "));
 calculateDemeritPoints(carspeed);
