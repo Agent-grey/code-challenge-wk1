@@ -1,51 +1,79 @@
-function calculateNetSalary(basicSalary, benefits) {
-    // Step 1: Calculate Gross Salary
-    const grossSalary = basicSalary + benefits;
+function calculateNetSalary() {
+    const basicSalary = parseFloat(prompt("Enter your basic salary: "));
+    const benefits = parseFloat(prompt("Enter your benefits: "));
 
-    // Step 2: Calculate PAYE Tax
-    const annualTaxablePay = grossSalary * 12;
-    let payeRate;}
-
-    if (annualTaxablePay <= 288000) {
-        payeRate = 0.1;
-    } else if (annualTaxablePay <= 388000) {
-        payeRate = 0.25;
-    } else if (annualTaxablePay <= 6000000) {
-        payeRate = 0.3;
-    } else if (annualTaxablePay <= 9600000) {
-        payeRate = 0.325;
-    } else {
-        payeRate = 0.35;
+    if (isNaN(basicSalary) || isNaN(benefits)) {
+        console.log("Please enter valid numbers for basic salary and benefits.");
+        return;
     }
 
-    const paye = annualTaxablePay * payeRate / 12;
+    const grossSalary = basicSalary + benefits;
 
-    // Step 3: Calculate NHIF Deductions
-    let nhifDeduction;
+    // Calculate (Tax)
+    let paye;
+    if (grossSalary <= 24000) {
+        paye = grossSalary * 0.1;
+    } else if (grossSalary <= 32333) {
+        paye = 24000 * 0.1 + (grossSalary - 24000) * 0.25;
+    } else if (grossSalary <= 500000) {
+        paye = 24000 * 0.1 + (32333 - 24000) * 0.25 + (grossSalary - 32333) * 0.3;
+    } else if (grossSalary <= 800000) {
+        paye = 24000 * 0.1 + (32333 - 24000) * 0.25 + (500000 - 32333) * 0.3 + (grossSalary - 500000) * 0.325;
+    } else {
+        paye = 24000 * 0.1 + (32333 - 24000) * 0.25 + (500000 - 32333) * 0.3 + (800000 - 500000) * 0.325 + (grossSalary - 800000) * 0.35;
+    }
+
+    // Calculate NHIF Deductions
+    let nhif;
     if (grossSalary <= 5999) {
-        nhifDeduction = 150;
+        nhif = 150;
     } else if (grossSalary <= 7999) {
-        nhifDeduction = 300;
-    } // ... continue with other ranges
+        nhif = 300;
+    } else if (grossSalary <= 11999) {
+        nhif = 400;
+    } else if (grossSalary <= 14999) {
+        nhif = 500;
+    } else if (grossSalary <= 19999) {
+        nhif = 600;
+    } else if (grossSalary <= 24999) {
+        nhif = 750;
+    } else if (grossSalary <= 29999) {
+        nhif = 850;
+    } else if (grossSalary <= 34999) {
+        nhif = 900;
+    } else if (grossSalary <= 39999) {
+        nhif = 950;
+    } else if (grossSalary <= 44999) {
+        nhif = 1000;
+    } else if (grossSalary <= 49999) {
+        nhif = 1100;
+    } else if (grossSalary <= 59999) {
+        nhif = 1200;
+    } else if (grossSalary <= 69999) {
+        nhif = 1300;
+    } else if (grossSalary <= 79999) {
+        nhif = 1400;
+    } else if (grossSalary <= 89999) {
+        nhif = 1500;
+    } else if (grossSalary <= 99999) {
+        nhif = 1600;
+    } else {
+        nhif = 1700;
+    }
 
-    // Step 4: Calculate NSSF Deductions
-    let nssfDeduction;
-    if (pensionablePay <= 6000) {
-        nssfDeduction = 0.06 * pensionablePay;
-    } else if (pensionablePay <= 18000) {
-        nssfDeduction = 0.06 * 6000 + 0.06 * (pensionablePay - 6000);
-    } // ... continue with other tiers
+    const nssf = Math.min(grossSalary * 0.06, 2160);
 
-    // Step 5: Calculate Net Salary
-    const netSalary = grossSalary - paye - nhifDeduction - nssfDeduction;
+    const housingLevy = grossSalary * 0.015;
 
-    console.log(`Gross Salary: ${grossSalary.toFixed(2)}`);
-    console.log(`PAYE: ${paye.toFixed(2)}`);
-    console.log(`NHIF Deduction: ${nhifDeduction.toFixed(2)}`);
-    console.log(`NSSF Deduction: ${nssfDeduction.toFixed(2)}`);
-    console.log(`Net Salary: ${netSalary.toFixed(2)}`);
-//---------------------------------------------------------------------//
-    const basicSalary = parseFloat(prompt("Enter basic salary (Ksh):"));
-const benefits = parseFloat(prompt("Enter additional benefits (Ksh):"));
+  
+    const netSalary = grossSalary - paye - nhif - nssf - housingLevy;
 
-calculateNetSalary(basicSalary, benefits);
+    console.log(`Gross Salary: Ksh ${grossSalary.toFixed(2)}`);
+    console.log(`PAYE (Tax): Ksh ${paye.toFixed(2)}`);
+    console.log(`NHIF Deduction: Ksh ${nhif.toFixed(2)}`);
+    console.log(`NSSF Deduction: Ksh ${nssf.toFixed(2)}`);
+    console.log(`Housing Levy: Ksh ${housingLevy.toFixed(2)}`);
+    console.log(`Net Salary: Ksh ${netSalary.toFixed(2)}`);
+}
+
+calculateNetSalary();

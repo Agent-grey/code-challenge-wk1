@@ -2,20 +2,29 @@
 /*   > For example, if the speed is 80, it should print: “Points: 2”. If the driver gets more than 12 points, the function should print: “License suspended”.*/
 
 
-const speedLimit= 70;
-const aboveSpeedLimitDemeritPoint= 5;
-if (speed<speedLimit){
-    console.log("ok")
-    return;
-}
-const speedDifference = speed-speedLimit;
-const demeritPoints = Math.floor(speedDifference/aboveSpeedLimitDemeritPoint);
-if(demeritPoints>12){
-    console.log("License suspended");
-}
-else{
-    console.log("points: $(demeritPoints)");
-}
-//-------------------------------------------------------------------------------------------------------------//
-const carspeed = parseFloat(prompt("Enter the car speed "));
-calculateDemeritPoints(carspeed);
+function speedDetector() {
+    let speed = prompt("Enter the speed of the car (in km/s):");
+    speed = parseInt(speed);
+  
+    if (isNaN(speed) || speed < 0) {
+      console.log("Invalid speed. Please enter a positive number.");
+      return;
+    }
+  
+    const speedLimit = 70;
+    const kmPerPoint = 5;
+  
+    if (speed <= speedLimit) {
+      console.log("Ok");
+    } else {
+      let points = Math.floor((speed - speedLimit) / kmPerPoint);
+      if (points > 12) {
+        console.log("License suspended");
+      } else {
+        console.log(`Points: ${points}`);
+      }
+    }
+  }
+  
+  speedDetector();
+  
